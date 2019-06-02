@@ -14,6 +14,17 @@ public class AjhUserinfo {
     private String email;
     private String birthday;
 
+    @Transient
+    private String address;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Integer getId() {
         return id;
     }

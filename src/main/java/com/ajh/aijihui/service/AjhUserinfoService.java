@@ -45,7 +45,7 @@ public class AjhUserinfoService {
 	 * @return
 	 */
 	public AjhUserinfo getAjhUserinfo(AjhUserinfo ajhUserinfo) {
-        return  ajhUserinfoMapper.selectOne(ajhUserinfo);
+        return  ajhUserinfoMapper.selectUserInfo(ajhUserinfo.getUserId());
     }
 
 }

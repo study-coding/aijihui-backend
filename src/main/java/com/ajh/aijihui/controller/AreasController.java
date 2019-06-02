@@ -25,9 +25,9 @@ public class AreasController {
         }
        @RequestMapping("listAreas")
         public ResponseVO listAreas(Areas areas, Integer pageNo, Integer pageSize ){
-            Object object =  areasService.listAreas(areas,pageNo,pageSize);
-            return new ResponseVO(object);
-       }
+        Object object =  areasService.listAreas(areas,pageNo,pageSize);
+        return new ResponseVO(object);
+    }
         @RequestMapping("insertAreas")
         public ResponseVO insertAreas(Areas areas){
             areasService.addAreas(areas);

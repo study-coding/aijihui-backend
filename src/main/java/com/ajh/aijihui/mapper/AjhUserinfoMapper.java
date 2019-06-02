@@ -10,4 +10,5 @@ public interface AjhUserinfoMapper extends Mapper<AjhUserinfo> {
 
 	int changeUserInfo(@Param("id")Integer id, @Param("username")String username, @Param("email")String email, @Param("birthday")String birthday);
 
+	AjhUserinfo selectUserInfo(Integer userId);
 }

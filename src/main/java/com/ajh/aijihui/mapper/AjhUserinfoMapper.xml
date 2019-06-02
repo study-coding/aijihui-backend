@@ -6,4 +6,12 @@
         update ajh_userinfo set user_name = #{username},email = #{email},birthday = #{birthday} where user_id = #{id}
     </insert>
 
+    <select id="selectUserInfo" resultType="com.ajh.aijihui.entity.AjhUserinfo">
+        select info.*,info.user_name userName,addr.address
+        from ajh_userinfo info,
+            ajh_addr addr
+        where info.user_id = addr.user_id
+		  and info.user_id = #{userId}
+    </select>
+
 </mapper>
