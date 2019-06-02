@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ajh.aijihui.mapper.AjhProductMapper">
+
+    <select id="getAjhProduct" resultType="com.ajh.aijihui.entity.AjhProduct">
+        select pro.*,pro.product_name productName,pro.pri_price priPrice,pro.now_price nowPrice,pro.pic_url picUrl,kind.kind_name kindName,band.band_name bandName,info.user_name username
+        from ajh_product pro,
+            ajh_kind kind,
+            ajh_band band,
+            ajh_userinfo info
+        where pro.kind_id = kind.id
+            and pro.band_id = band.id
+            and pro.user_id = info.user_id
+            and pro.id = #{id}
+    </select>
+
+    <select id="listAjhProduct" resultType="com.ajh.aijihui.entity.AjhProduct">
+        select pro.*,pro.product_name productName,pro.pri_price priPrice,pro.now_price nowPrice,pro.pic_url picUrl,kind.kind_name kindName,band.band_name bandName,info.user_name username
+        from ajh_product pro,
+        ajh_kind kind,
+        ajh_band band,
+        ajh_userinfo info
+        where pro.kind_id = kind.id
+            and pro.band_id = band.id
+            and pro.user_id = info.user_id
+        <if test="productName != null and productName.length !=''">
+            and pro.product_name like CONCAT('%',#{productName},'%')
+        </if>
+        <if test="kindId != 0">
+            and pro.kind_id = #{kindId}
+        </if>
+        <if test="bandId != 0">
+            and pro.band_id = #{bandId}
+        </if>
+        <if test="degree != null and degree.length !=''">
+            and pro.degree = #{degree}
+        </if>
+    </select>
+
+    <update id="releaseProduct">
+        update ajh_product set publish_status = 0 where id = #{id}
+    </update>
+
+    <select id="getAjhProductByCarId" resultType="com.ajh.aijihui.entity.AjhProduct">
+        select pro.id,pro.user_id userId
+        from ajh_product pro,
+                ajh_car car
+        where pro.id = car.product_id
+                and car.id = #{id}
+    </select>
+
+</mapper>

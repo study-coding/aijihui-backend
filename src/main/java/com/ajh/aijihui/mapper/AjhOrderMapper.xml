@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ajh.aijihui.mapper.AjhOrderMapper">
+
+    <select id="listUserOrders" resultType="com.ajh.aijihui.entity.AjhOrder">
+        select if(ord.order_type = "1","买","卖") orderType,
+            info.user_name userName,
+            pro.pic_url url,
+            pro.product_name productName,
+            pro.now_price nowPrice
+        from ajh_order ord,
+            ajh_userinfo info,
+            ajh_product pro
+        where ord.user_id = info.user_id
+            and ord.product_id = pro.id
+            and ord.user_id = #{userId}
+    </select>
+
+    <select id="listAllOrders" resultType="com.ajh.aijihui.entity.AjhOrder">
+        select if(ord.order_type = "1","买","卖") orderType,
+            info.user_name userName,
+            pro.pic_url url,
+            pro.product_name productName,
+            pro.now_price nowPrice
+        from ajh_order ord,
+            ajh_userinfo info,
+            ajh_product pro
+        where ord.user_id = info.user_id
+            and ord.product_id = pro.id
+    </select>
+
+    <delete id="deleteOrder">
+        delete  from ajh_order where id = #{id}
+    </delete>
+</mapper>
